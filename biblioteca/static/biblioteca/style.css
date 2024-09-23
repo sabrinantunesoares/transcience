@@ -42,13 +42,23 @@ a {
 }
 
 .artigo-item{
-    border: 1px solid #ffffff; 
     border-radius: 10px;    
     padding: 10px;
     margin-bottom: 10px;    /* Espaço entre os artigos */
-    background-color: #1bc15b; /* Cor de fundo opcional */
-    border: 3px solid rgb(186, 40, 40);
+    background-color: #ffffff; /* Cor de fundo opcional */
+    border: 2px solid rgb(183, 178, 178);
     list-style: none;
+    box-shadow: 3px 3px 4px rgb(183, 178, 178);
+    transition: transform 0.3s, box-shadow 0.3s; 
+}
+
+.artigo-item:hover {
+    transform: scale(1.04); /* Aumenta o item levemente */
+}
+
+.texto-menor {
+    font-size: 15px; /* Tamanho reduzido para o restante do texto */
+    color: #555; /* Cor mais clara opcional */
 }
 
 /* Cabeçalho */
@@ -62,9 +72,10 @@ a {
     align-items: center;
     justify-content: space-between;
     padding: 0 1rem;
-    background-color: var(--white-color);
+    background-color: #ECECEC;
     z-index: var(--z-fixed);
     transition: .5s;
+    box-shadow: 3px 3px 4px rgb(183, 178, 178);
 }
 
 .header_toggle {
@@ -94,11 +105,11 @@ a {
     left: 0;
     width: var(--nav-width);
     height: 100vh;
-    background-color: var(--first-color);
+    background-color: #ECECEC;
     padding: 0; /* Removido qualquer padding */
     transition: .5s;
     z-index: var(--z-fixed);
-
+    box-shadow: 3px 3px 4px rgb(183, 178, 178);
 }
 
 /* Nav interno da barra lateral */
@@ -108,7 +119,6 @@ a {
     flex-direction: column;
     justify-content: space-between;
     overflow: hidden;
-    border: 2px solid grey;
     margin-top: 0; /* Corrigido */
 }
 
@@ -130,7 +140,7 @@ a {
 }
 
 .nav_logo-name {
-    color: var(--black-color);
+    color: #1F4172;
     font-weight: 700;
 }
 
@@ -207,7 +217,8 @@ a {
 
     .l-navbar {
         left: 0;
-        padding: 1rem 1rem 0 0;
+        padding: 0;
+        margin: 0;
     }
 
     .show {
@@ -215,7 +226,8 @@ a {
     }
 
     .body-pd {
-        padding-left: calc(var(--nav-width) + 188px);
+        
+        padding-left: var(--nav-width);
     }
     
     .form-container {
@@ -233,5 +245,38 @@ a {
         background-color: #ffffff;
     }
 
+    .container-fluid{
+        padding-left: 0;
+        margin-left: 0;
+        margin-top: calc(var(--header-height) + 40px); 
+    }
+    
 
+    .additional-container {
+        border: 1px solid #ccc;
+        padding: 100px;
+        background-color: #FDF0F0;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        position: fixed
+      }
+
+    .form-control{
+        width: 400px;
+        border-radius: 10px;
+    }
+
+    .container {
+        margin-top: 2rem; /* Ajuste o valor conforme necessário */
+    }
+    
+    .row {
+        margin-bottom: 1rem; /* Espaçamento entre linhas, se necessário */
+    }
+    
+    .form-group {
+        margin-bottom: 1rem; /* Espaçamento entre campos do formulário */
+    }
+    
+    
 }

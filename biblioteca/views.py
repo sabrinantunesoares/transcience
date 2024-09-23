@@ -9,3 +9,9 @@ class IndexView(generic.ListView):
     def get_queryset(self):
         return Artigo.objects.all()
 
+class CadastroView(generic.ListView):
+    template_name = "biblioteca/cadastro.html"
+    context_object_name = "biblioteca"
+
+    def get_queryset(self):
+        return Artigo.objects.all()

@@ -24,7 +24,7 @@
     <nav class="nav">
         <div>
             <a href="#" class="nav_logo">
-                <img src="/static/artigos/imagens/logo.png" alt="Logo" class="nav_logo-img">
+                <img src="{% static 'biblioteca/images/logo.png' %}" alt="Logo" class="nav_logo-img">
                 <span class="nav_logo-name">Transcience</span>
             </a>
             <div class="nav_list">
@@ -54,36 +54,54 @@
     </nav>
 </div>
 
+  
+<div class="container-fluid">
 
-  <!--Container Main start-->
-  <div class="height-100 bg-light">
-    <div class="artigos-container">
-      {% if artigos %}
-        <ul>
-          {% for a in artigos %}
-            <li class="artigo-item">
-              <a>{{ a.titulo }}
-    
+  <div class="row">
+
+    <!-- Coluna de Artigos -->
+    <div class="col-lg-8 col-md-12">
+      
+      <div class="artigos-container">
+        
+        {% if artigos %}
+          <ul>
+            {% for a in artigos %}
+              <li class="artigo-item">
+
                 {% if a.relevancia_id.imagem and a.relevancia_id.imagem.url %}
-                  <img src="{% static a.relevancia_id.imagem %}" alt="{{ a.relevancia_id.descricao }}" width="20" height="20">
-                {% else %}
-                  <p>Imagem não disponível</p>
-                {% endif %}
-              </a>
+                <img src="{% get_media_prefix %}{{a.relevancia_id.imagem }}" alt="{{ a.relevancia_id.descricao }}" width="20" height="20">
+              {% else %}
+                <p>Imagem não disponível</p>
+              {% endif %}
+                <a>{{ a.titulo }}
+
+
+                </a>
+
+                <h4 class="palavras-chave">{{ a.palavras_chave.nome }}</h4>
+                {% for palavra_chave in a.palavras_chave.all %}
+                  <span class="texto-menor">{{ palavra_chave }}</span>
+
+                {% endfor %}
+                <p class="texto-menor"><a href="{{ a.link }}" target="_blank"> > Ler Mais</a> ({{ a.ano_id }})</p>
+              </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+    </div>
     
-              <h4> {{ a.palavras_chave.nome }} </h4>
-              {% for palavra_chave in a.palavras_chave.all %}
-                {{ palavra_chave }}
-              {% endfor %}
-              <p><a href="{{ a.link }}" target="_blank"> > Ler Mais</a> ( {{ a.ano_id }} )</p>
-            </li>
-          {% endfor %}
-        </ul>
-      {% endif %}
+    <!-- Coluna Adicional (Container à direita) -->
+    <div class="col-lg-4 col-md-12">
+      <div class="additional-container">
+        <h3>Conteúdo Adicional</h3>
+        <p>Futuro Chatbot :)</p>
+      </div>
     </div>
 
-  
   </div>
-  
+</div>
 
 
+ 
