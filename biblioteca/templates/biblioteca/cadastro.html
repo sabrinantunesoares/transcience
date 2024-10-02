@@ -7,69 +7,82 @@
 <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
 <link rel="stylesheet" href="{% static 'fa/css/all.min.css' %}">
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
-<link rel="stylesheet" href="{% static 'biblioteca/style.css' %}">
+<link rel="stylesheet" href="{% static 'biblioteca/style_cadastro.css' %}">
 
 <div class="container">
-  <div class="row">
+  <div class="row justify-content-center">
 
-    <h3>Crie uma nova conta</h3>
-
-    <!-- Primeira coluna -->
-    <div class="col-md-6">
-      <form>
-        <div class="form-group">
-          <label for="inputNome">Nome</label>
-          <input type="text" class="form-control" id="inputNome" placeholder="Digite seu nome">
-        </div>
-
-        <div class="form-group">
-          <label for="inputDataNascimento">Data de Nascimento</label>
-          <input type="date" class="form-control" id="inputDataNascimento">
-        </div>
-
-        <div class="form-group">
-          <label for="inputInstituicao">Instituição/Escola</label>
-          <input type="text" class="form-control" id="inputInstituicao" placeholder="Digite sua instituição ou escola">
-        </div>
-
-        <div class="form-group">
-          <label for="inputSenha">Senha</label>
-          <input type="password" class="form-control" id="inputSenha" placeholder="Senha">
-        </div>
-      </form>
+    <!-- Div esquerda -->
+    <div class="col-md-2">
+      <!-- Conteúdo da div esquerda, pode ser deixado vazio ou adicionar algo -->
     </div>
 
-    <!-- Segunda coluna -->
-    <div class="col-md-6">
-      <form>
-        <div class="form-group">
-          <label for="inputEmail">Email</label>
-          <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+    <!-- Div central com o formulário -->
+    <div class="col-md-8">
+      <div class="row">
+
+        <h3 class="titulo-cadastro">Crie uma nova conta</h3>
+        <div class="text-center mt-3">
+        <span style="color: #febbbb;">Já tem conta existente?</span> 
+        <a href="/biblioteca/login" style="color: #1f4172;">Faça o Login</a>
+        </div>
+        <!-- Primeira coluna -->
+        <div class="col-md-6">
+          <form>
+            <div class="form-group">
+              <label for="inputNome">Nome</label>
+              <input type="text" class="form-control" id="inputNome" placeholder="Digite seu nome">
+            </div>
+
+            <div class="form-group">
+              <label for="inputDataNascimento">Data de Nascimento</label>
+              <input type="date" class="form-control" id="inputDataNascimento">
+            </div>
+
+            <div class="form-group">
+              <label for="inputInstituicao">Instituição/Escola</label>
+              <input type="text" class="form-control" id="inputInstituicao" placeholder="Digite sua instituição ou escola">
+            </div>
+
+            <div class="form-group">
+              <label for="inputSenha">Senha</label>
+              <input type="password" class="form-control" id="inputSenha" placeholder="Senha">
+            </div>
+          </form>
         </div>
 
-        <div class="form-group">
-          <label for="inputGenero">Gênero</label>
-          <select id="inputGenero" class="form-control">
-            <option selected>Escolher...</option>
-          </select>
+        <!-- Segunda coluna -->
+        <div class="col-md-6">
+          <form>
+            <div class="form-group">
+              <label for="inputEmail">Email</label>
+              <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+            </div>
+
+            <div class="form-group">
+              <label for="inputGenero">Gênero</label>
+              <select id="inputGenero" class="form-control">
+                <option selected>Escolher...</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="inputVinculo">Vínculo</label>
+              <select id="inputVinculo" class="form-control">
+                <option selected>Escolher...</option>
+              </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-3">Criar Conta</button>
+          </form>
         </div>
 
-        <div class="form-group">
-          <label for="inputVinculo">Vínculo</label>
-          <select id="inputVinculo" class="form-control">
-            <option selected>Escolher...</option>
-          </select>
-        </div>
-        
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" id="gridCheck">
-          <label class="form-check-label" for="gridCheck">
-            Registrar
-          </label>
-        </div>
+      </div>
+    </div>
 
-        <button type="submit" class="btn btn-primary mt-3">Criar Conta</button>
-      </form>
+    <!-- Div direita -->
+    <div class="col-md-2">
+      <!-- Conteúdo da div direita, pode ser deixado vazio ou adicionar algo -->
     </div>
 
   </div>

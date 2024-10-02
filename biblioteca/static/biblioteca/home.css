@@ -1,0 +1,148 @@
+.header {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--header-height);
+    z-index: var(--z-fixed);
+    transition: .5s;
+    box-shadow: 3px 3px 4px rgb(183, 178, 178);
+}
+
+.navbar-brand {
+    font-size: 30px;
+    color: #1f4172;
+}
+
+.nav_logo-img {
+    width: 60px; 
+    height: 60px;
+    margin-right: 10px; /* Adiciona um espaço entre a imagem e o título */
+}
+
+.titulo {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 24px;
+    color: #1f4172; /* Cor do título */
+    margin-right: auto; /* Garante que a parte do menu fique à direita */
+}
+
+/* Estilização dos links no lado direito */
+.nav_right {
+    display: flex;
+    gap: 15px; /* Espaçamento entre os links */
+    margin-left: auto; /* Faz o menu ficar à direita */
+}
+
+.nav_right a {
+    text-decoration: none;
+    color: #1f4172; /* Cor do texto do link */
+    font-weight: 500;
+    transition: color 0.3s; /* Efeito de transição ao passar o mouse */
+}
+
+.nav_right a:hover {
+    color: #0056b3; /* Cor do texto do link ao passar o mouse */
+}
+
+/* Estilização dos modais */
+.modal-header {
+    background-color: #1f4172; /* Cor de fundo do cabeçalho do modal */
+    color: white; /* Cor do texto do cabeçalho do modal */
+}
+
+.modal-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
+.modal-body {
+    font-family: 'Poppins', sans-serif;
+    color: #333; /* Cor do texto do corpo do modal */
+}
+
+.modal-footer {
+    background-color: #f8f9fa; /* Cor de fundo do rodapé do modal */
+}
+
+/* Botões de fechar do modal */
+.btn-close {
+    background: transparent;
+    border: none;
+}
+
+.btn {
+    background-color: #1f4172; /* Cor de fundo dos botões */
+    color: white; /* Cor do texto do botão */
+}
+
+.btn:hover {
+    background-color: #0056b3; /* Cor do botão ao passar o mouse */
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column; /* Muda a direção do cabeçalho em telas menores */
+        align-items: flex-start; /* Alinhamento dos itens */
+    }
+    
+    .nav_right {
+        flex-direction: column; /* Muda a direção dos links em telas menores */
+        gap: 5px; /* Espaçamento entre os links */
+    }
+}
+
+.img-fluid {
+    width: 500px;
+    height: 500px;
+}
+
+.apresentacao {
+    color: #1f4172;
+    font-size: 50px;
+    font-weight: bold;
+    margin-top: 3rem; /* Distância de 2rem do menu */
+    
+}
+
+.btn.btn-primary {
+    margin-top: 7rem;
+    border-radius: 25px;
+    padding: 15px 30px; /* Aumenta o espaçamento interno do botão */
+    font-size: 18px; /* Aumenta o tamanho da fonte */
+    width: 200px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    box-shadow: 3px 3px 4px rgb(183, 178, 178);
+}
+
+.btn.btn-primary:hover {
+    background-color: #988e8e; /* Cor de fundo ao passar o mouse */
+    color: white; /* Cor do texto ao passar o mouse */
+    transform: scale(1.02); /* Aumenta levemente o tamanho do botão ao passar o mouse */
+}
+
+.btn.btn-secondary {
+    margin-top: 7rem;
+    border-radius: 25px;
+    padding: 15px 30px; /* Aumenta o espaçamento interno do botão */
+    font-size: 18px; /* Aumenta o tamanho da fonte */
+    width: 200px;
+    color: #1f4172;
+    background-color: #febbbb;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease; /* Animação suave */
+    box-shadow: 3px 3px 4px rgb(183, 178, 178);
+    border-color: #febbbb;
+}
+
+.btn.btn-secondary:hover {
+    background-color: #988e8e;/* Cor de fundo ao passar o mouse */
+    color: white; /* Cor do texto ao passar o mouse */
+    transform: scale(1.02); /* Aumenta levemente o tamanho do botão ao passar o mouse */
+}

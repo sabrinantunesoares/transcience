@@ -4,7 +4,11 @@ from . import views
 
 app_name = "biblioteca"
 urlpatterns = [
-    path("", views.IndexView.as_view(), name="index"),
+    path("index/", views.IndexView.as_view(), name="index"),
+    path("", views.HomeView.as_view(), name="home"),
     path("cadastro/", views.CadastroView.as_view(), name="cadastro"),
+    path("login/", views.LoginView.as_view(), name="login"),
+    path("cadastro_artigo/", views.Cadastro_artigoView.as_view(), name="cadastro_artigo"),
+    path("perfil/", views.PerfilView.as_view(), name="perfil"),
 ]
 
