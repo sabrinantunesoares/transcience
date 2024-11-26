@@ -1,10 +1,15 @@
 from django.shortcuts import render
 from django.views import generic
 from .models import Artigo
+from django.contrib.auth.mixins import LoginRequiredMixin
 
-class IndexView(generic.ListView):
+class IndexView(LoginRequiredMixin, generic.ListView):
     template_name = "biblioteca/index.html"
     context_object_name = "artigos"
+    login_url = '/auth/login/'  # Página de login para redirecionar se o usuário não estiver autenticado
+
+    def get_queryset(self):
+        return Artigo.objects.all()
 
     def get_queryset(self):
         return Artigo.objects.all()

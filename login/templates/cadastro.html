@@ -1,0 +1,107 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Conta - Transcience</title>
+    
+    <!-- Fonts e Bootstrap -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'fa/css/all.min.css' %}">
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'biblioteca/style_cadastro.css' %}">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .titulo-cadastro {
+            text-align: center;
+            color: #1f4172;
+            font-weight: 500;
+            margin-top: 4rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-control {
+            border-radius: 10px;
+        }
+
+        .btn-primary {
+            color: #f0f0f0;
+            background-color: #1f4172;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+        }
+
+        .btn-primary:hover {
+            background-color: #f0f0f0;
+            color: #1f4172;
+        }
+
+        .row {
+            margin-bottom: 2rem;
+        }
+
+        .text-center a {
+            color: #1f4172;
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+        .text-center a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3 class="titulo-cadastro">Crie uma nova conta</h3>
+        
+        <!-- Formulário de cadastro -->
+        <div class="row justify-content-center">
+            <div class="col-md-5">
+                <form action="{% url 'cadastro' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="username">Nome de Usuário</label>
+                        <input type="text" id="username" name="username" class="form-control" placeholder="Digite seu nome de usuário" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" class="form-control" placeholder="Digite seu email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Senha</label>
+                        <input type="password" id="password" name="password" class="form-control" placeholder="Digite sua senha" minlength="8" required>
+                        <small class="form-text text-muted">
+                            A senha deve conter pelo menos:
+                            <ul>
+                                <li>1 letra maiúscula</li>
+                                <li>1 número</li>
+                                <li>1 caractere especial (por exemplo: @, #, !, etc.)</li>
+                                <li>No mínimo 8 caracteres</li>
+                            </ul>
+                        </small>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100 mt-3">Cadastrar</button>
+                </form>
+                <div class="text-center mt-3">
+                    <span>Já tem uma conta?</span>
+                    <a href="{% url 'login' %}">Faça o Login</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

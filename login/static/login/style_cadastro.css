@@ -1,0 +1,47 @@
+/* Estilos para os formulários e título */
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+.titulo-cadastro {
+    text-align: center;
+    color: #1f4172;
+    font-weight: 500;
+    margin-top: 4rem;
+    margin-bottom: 2rem;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-control {
+    border-radius: 10px;
+}
+
+.btn-primary {
+    color: #f0f0f0;
+    background-color: #1f4172;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+
+.btn-primary:hover {
+    background-color: #f0f0f0;
+    color: #1f4172;
+}
+
+.row {
+    margin-bottom: 2rem;
+}
+
+.text-center a {
+    color: #1f4172;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.text-center a:hover {
+    text-decoration: underline;
+}
