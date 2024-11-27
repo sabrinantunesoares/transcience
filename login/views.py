@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth import login as login_django
 from django.contrib.auth.decorators import login_required
 import re
+from django.contrib.auth import logout as logout_django
 
 def cadastro(request):
     if request.method == "GET":
@@ -55,9 +56,14 @@ def login(request):
         else:
             
             return HttpResponse('Email ou senha inválidos')
+        
+
+
+def logout(request):
+    logout_django (request)
+    return redirect('login')
 
 @login_required(login_url="/auth/login/")    
 def plataforma(request):
     if request.user.is_authenticated:
         return HttpResponse('plataforma')
-

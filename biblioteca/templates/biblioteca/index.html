@@ -15,7 +15,27 @@
 <body id="body-pd">
   <header class="header" id="header">
       <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
-      <a> Cabeçalho teste</a>
+
+      
+  
+      {% if user.is_authenticated %}
+      Bem vindo(a) {{ user.username }}!
+ 
+      {% else %}
+      <p>You are not logged in</p>
+      <a href="{% url 'login' %}">Log In</a>
+      {% endif %}
+      
+
+
+      <a> Cabeçalho teste </a>
+      
+
+      <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Log Out</button>
+      </form>
+
   </header>
 
 
