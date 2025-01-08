@@ -153,6 +153,7 @@ a {
 
 .nav_link:hover {
     color: #1F4172;
+    transform: scale(1.1);
 }
 
 .nav_icon {
@@ -253,9 +254,9 @@ a {
     
 
     .additional-container {
-        border: 1px solid #ccc;
+       
         padding: 100px;
-        background-color: #FDF0F0;
+        
         border-radius: 10px;
         margin-bottom: 20px;
         position: fixed
@@ -282,6 +283,95 @@ a {
         display: flex;
         justify-content: center;
         margin-top: 2rem;
+    }
+
+    .search-bar {
+        margin-bottom: 20px;
+    }
+
+    .input-group .form-control {
+        border-radius: 0;
+    }
+
+    .input-group .btn {
+        border-radius: 0;
+    }
+    
+    .search-container {
+        margin-bottom: 20px;
+        text-align: center;
+      }
+      
+      .search-input {
+        width: 80%;
+        padding: 10px;
+        font-size: 16px;
+      }
+      
+      .search-button {
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+
+    
+
+    .search-input {
+        padding: 10px 20px;
+        font-size: 16px;
+        width: 600px;
+        border: 2px solid #ccc;
+        border-radius: 25px;
+        outline: none;
+        transition: border-color 0.3s;
+        
+    }
+
+    /* Efeito de foco no input */
+    .search-input:focus {
+        border-color: #4A90E2; /* Cor azul */
+    }
+
+    /* Estilo do botão de busca */
+    .search-button {
+        background-color: #1F4172;
+        color: white;
+        font-size: 16px;
+        border: none;
+        border-radius: 25px;
+        padding: 10px 20px;
+        margin-left: 10px;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.2s;
+    }
+
+    /* Efeito de hover no botão */
+    .search-button:hover {
+        background-color: #357ABD;
+        transform: scale(1.05);
+    }
+
+    /* Efeito de foco no botão */
+    .search-button:focus {
+        outline: none;
+    }
+    
+    .logout-button {
+        background-color: #847776; /* Cor de fundo vermelha */
+        color: white; /* Cor do texto branca */
+        border: none; /* Remove a borda */
+        padding: 10px 20px; /* Adiciona espaçamento interno */
+        font-size: 15px; /* Define o tamanho da fonte */
+        cursor: pointer; /* Muda o cursor para indicar que é clicável */
+        border-radius: 5px; /* Adiciona bordas arredondadas */
+        transition: background-color 0.3s ease; /* Transição suave para a cor de fundo */
+        margin-top: 15px;
+        transition: background-color 0.3s, transform 0.2s;
+    }
+    
+    .logout-button:hover {
+        background-color: #d32f2f; 
+        transform: scale(1.05);
     }
     
 }

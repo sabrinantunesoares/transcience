@@ -55,7 +55,7 @@
   
   <div class="col-md-8" style="margin-top: 150px;">
     <div class="row">
-        
+        {{anos}}
       <!-- Primeira coluna -->
       <div class="col-md-6">
         <form>
@@ -117,7 +117,8 @@
 
       <!-- Segunda coluna -->
       <div class="col-md-6">
-        <form>
+        <form action="{% url 'novoArtigo' %}" method="POST">
+            {% csrf_token %}  
             <div class="form-group col-md-4">
                 <label for="inputEstado">Relevância</label>
                 <select id="inputEstado" class="form-control">
@@ -136,8 +137,9 @@
               <input type="text" class="form-control" id="inputAddress2" placeholder="Apartamento, hotel, casa, etc.">
             </div>
         
+            
 
-          <button type="submit" class="btn btn-primary mt-3">Submeter</button>
+            <button type="submit" class="btn btn-primary mt-3">Submeter</button>
         </form>
       </div>
 

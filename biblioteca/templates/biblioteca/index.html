@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="{% static 'fa/css/all.min.css' %}">
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
 <link rel="stylesheet" href="{% static 'biblioteca/style.css' %}">
+<link href="fontawesome/css/all.css" rel="stylesheet">
 
 <!--Menu no topo-->
 
@@ -28,13 +29,13 @@
       
 
 
-      <a> Cabeçalho teste </a>
-      
+      <a>  </a>
 
       <form action="{% url 'logout' %}" method="post">
         {% csrf_token %}
-        <button type="submit">Log Out</button>
+        <button type="submit" class="logout-button">Sair</button>
       </form>
+    
 
   </header>
 
@@ -53,7 +54,7 @@
                     <span class="nav_name">Página inicial</span>
                 </a>
                 <a href="{% url 'biblioteca:perfil' %}" class="nav_link">
-                    <i class='bx bx-user nav_icon'></i>
+                  <i class="fa-solid fa-circle-user"></i>
                     <span class="nav_name">Meu perfil</span>
                 </a>
                 <a href="#" class="nav_link">
@@ -86,6 +87,13 @@
     <!-- Coluna de Artigos -->
     <div class="col-lg-8 col-md-12">
       
+      <div class="search-container">
+        <form method="get" action="{% url 'biblioteca:index' %}">
+          <input type="text" name="q" placeholder="Buscar por palavra-chave..." class="search-input" value="{{ request.GET.q }}">
+          <button type="submit" class="search-button">Buscar</button>
+        </form>
+      </div>
+
       <div class="artigos-container">
         
         {% if artigos %}
@@ -119,8 +127,8 @@
     <!-- Coluna Adicional (Container à direita) -->
     <div class="col-lg-4 col-md-12">
       <div class="additional-container">
-        <h3>Conteúdo Adicional</h3>
-        <p>Futuro Chatbot :)</p>
+        <div class="formteste">
+        </div>
       </div>
     </div>
 

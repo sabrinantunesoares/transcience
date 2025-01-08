@@ -82,17 +82,16 @@ class Artigo(models.Model):
     palavras_chave = models.ManyToManyField(PalavraChave, related_name='artigos')
     usuario = models.ManyToManyField(Usuarios, related_name='artigos')
 
+    def novoArtigo(self, titulo=None, **extra_fields):
+        extra_fields.setdefault("is_staff", False)
+        extra_fields.setdefault("is_superuser", False)
+        return self.novoArtigo(titulo, **extra_fields)
+
+
     def __str__(self):
         return self.titulo
 
 
-    titulo = models.CharField(max_length=200)
-    link = models.CharField(max_length=255)
-    
-
-    def __str__(self):
-        return self.titulo
-    
 
 class Favorito(models.Model):
     usuario = models.ForeignKey(Usuarios, on_delete=models.CASCADE)

@@ -48,3 +48,12 @@ class PerfilView(generic.ListView):
 
     def get_queryset(self):
         return Artigo.objects.all()
+    
+def pesquisar_artigos(request):
+    query = request.GET.get('q', '')
+    if query:
+        artigos = Artigo.objects.filter(palavras_chave__nome__icontains=query)
+    else:
+        artigos = Artigo.objects.all()
+
+    return render(request, 'biblioteca/artigos.html', {'artigos': artigos})

@@ -10,5 +10,6 @@ urlpatterns = [
     path("login/", views.LoginView.as_view(), name="login"),
     path("cadastro_artigo/", views.Cadastro_artigoView.as_view(), name="cadastro_artigo"),
     path("perfil/", views.PerfilView.as_view(), name="perfil"),
+    path('pesquisar/', views.pesquisar_artigos, name='pesquisar_artigos'),
 ]
 
