@@ -373,5 +373,39 @@ a {
         background-color: #d32f2f; 
         transform: scale(1.05);
     }
+
+
+
+    .custom-button {
+        background-color: #1F4172;
+        color: white; 
+        padding: 10px 30px; 
+        border: none; 
+        border-radius: 50px; 
+        font-size: 18px; 
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); 
+        transition: background-color 0.3s ease, transform 0.3s ease; 
+    }
+    
+    .custom-button:hover {
+        background-color: #357ABD;
+        transform: translateY(-2px); 
+    }
+    
+    .custom-button:active {
+        transform: translateY(2px); 
+    }
+    
+    .col-md-6{
+        margin-top: 50px;
+    }
+
+    .form-group{
+        margin-top: 25px;
+    }
+
+    select {
+        color: black;
+    }
     
 }

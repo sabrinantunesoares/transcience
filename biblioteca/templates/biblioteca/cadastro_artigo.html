@@ -1,147 +1,142 @@
 {% load static %}
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-
-<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-<link rel="stylesheet" href="{% static 'fa/css/all.min.css' %}">
-<script src="{% static 'js/bootstrap.min.js' %}"></script>
-<link rel="stylesheet" href="{% static 'biblioteca/style.css' %}">
-
-<!--Menu no topo-->
-
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Artigo</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'fa/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'biblioteca/style.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+</head>
 <body id="body-pd">
-    <header class="header" id="header">
-        <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
-        <a> Submissão de artigos ao banco de dados </a>
-    </header>
-  
-  
-    <!--Menu lateral-->
-    <div class="l-navbar" id="nav-bar">
-      <nav class="nav">
-          <div>
-              <a href="#" class="nav_logo">
-                  <img src="{% static 'biblioteca/images/logo.png' %}" alt="Logo" class="nav_logo-img">
-                  <span class="nav_logo-name">Transcience</span>
-              </a>
-              <div class="nav_list">
-                  <a href="{% url 'biblioteca:index' %}" class="nav_link active">
-                      <i class='bx bx-grid-alt nav_icon'></i>
-                      <span class="nav_name">Página inicial</span>
-                  </a>
-                  <a href="#" class="nav_link">
-                      <i class='bx bx-user nav_icon'></i>
-                      <span class="nav_name">Meu perfil</span>
-                  </a>
-                  <a href="#" class="nav_link">
-                      <i class='bx bx-message-square-detail nav_icon'></i>
-                      <span class="nav_name">Biblioteca</span>
-                  </a>
-                  <a href="#" class="nav_link">
-                      <i class='bx bx-bookmark nav_icon'></i>
-                      <span class="nav_name">Configurações</span>
-                  </a>
-  
-              </div>
-          </div>
-          <a href="#" class="nav_link">
-              <i class='bx bx-log-out nav_icon'></i>
-              <span class="nav_name">Sobre nós</span>
-          </a>
-      </nav>
-  </div>
-  
-  <div class="col-md-8" style="margin-top: 150px;">
-    <div class="row">
-        {{anos}}
-      <!-- Primeira coluna -->
-      <div class="col-md-6">
-        <form>
-            <div class="form-group col-md-6">
-                <label for="inputEmail4">Título do artigo</label>
-                <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
-              </div>
-        
-              <div class="form-group col-md-4">
-                <label for="inputEstado">Ano</label>
-                <select id="inputEstado" class="form-control">
-                  <option selected>Escolher...</option>
-                  <option>...</option>
-                </select>
-              </div>  
-              
-              <fieldset class="form-group">
-                <div class="row">
-                    <legend class="col-form-label col-sm-2 pt-0">Palavras chave</legend>
-                    <div class="col-sm-10">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="palavrasChave" id="checkbox1" value="Transexual">
-                            <label class="form-check-label" for="checkbox1">
-                                Transexual
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="palavrasChave" id="checkbox2" value="Biologia">
-                            <label class="form-check-label" for="checkbox2">
-                                Biologia
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="palavrasChave" id="checkbox3" value="Genética">
-                            <label class="form-check-label" for="checkbox3">
-                                Genética
-                            </label>
-                        </div>
-        
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="palavrasChave" id="checkbox4" value="Social">
-                            <label class="form-check-label" for="checkbox4">
-                                Social
-                            </label>
-                        </div>
-        
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="palavrasChave" id="checkbox5" value="Psicologia">
-                            <label class="form-check-label" for="checkbox5">
-                                Psicologia
-                            </label>
-                        </div>
-        
-                    </div>
-                </div>
-            </fieldset>
-        </form>
-      </div>
 
-      <!-- Segunda coluna -->
-      <div class="col-md-6">
-        <form action="{% url 'novoArtigo' %}" method="POST">
-            {% csrf_token %}  
-            <div class="form-group col-md-4">
-                <label for="inputEstado">Relevância</label>
-                <select id="inputEstado" class="form-control">
-                  <option selected>Escolher...</option>
-                  <option>...</option>
-                </select>
-              </div>
-        
-            <div class="form-group">
-              <label for="inputAddress">Link do Artigo</label>
-              <input type="text" class="form-control" id="inputAddress" placeholder="Rua dos Bobos, nº 0">
-            </div>
-        
-            <div class="form-group">
-              <label for="inputAddress2">Pesquisador(a)</label>
-              <input type="text" class="form-control" id="inputAddress2" placeholder="Apartamento, hotel, casa, etc.">
-            </div>
-        
-            
-
-            <button type="submit" class="btn btn-primary mt-3">Submeter</button>
-        </form>
-      </div>
-
+<!-- Cabeçalho -->
+<header class="header" id="header">
+    <div class="header_toggle">
+        <i class='bx bx-menu' id="header-toggle"></i>
     </div>
-  </div>
+    <a>Submissão de artigos ao banco de dados</a>
+</header>
+
+<!-- Menu Lateral -->
+<div class="l-navbar" id="nav-bar">
+    <nav class="nav">
+        <div>
+            <a href="#" class="nav_logo">
+                <img src="{% static 'biblioteca/images/logo.png' %}" alt="Logo" class="nav_logo-img">
+                <span class="nav_logo-name">Transcience</span>
+            </a>
+            <div class="nav_list">
+                <a href="{% url 'biblioteca:index' %}" class="nav_link active">
+                    <i class='bx bx-grid-alt nav_icon'></i>
+                    <span class="nav_name">Página inicial</span>
+                </a>
+                <a href="#" class="nav_link">
+                    <i class='bx bx-user nav_icon'></i>
+                    <span class="nav_name">Meu perfil</span>
+                </a>
+                <a href="#" class="nav_link">
+                    <i class='bx bx-message-square-detail nav_icon'></i>
+                    <span class="nav_name">Biblioteca</span>
+                </a>
+                <a href="#" class="nav_link">
+                    <i class='bx bx-bookmark nav_icon'></i>
+                    <span class="nav_name">Configurações</span>
+                </a>
+            </div>
+        </div>
+        <a href="#" class="nav_link">
+            <i class='bx bx-log-out nav_icon'></i>
+            <span class="nav_name">Sobre nós</span>
+        </a>
+    </nav>
+</div>
+
+
+<div class="container mt-5">
+    <form action="{% url 'novoArtigo' %}" method="POST">
+        {% csrf_token %}
+        <div class="row">
+            
+            <div class="col-md-6">
+                
+                <div class="form-group">
+                    <label for="titulo">Título do Artigo</label>
+                    <input type="text" name="titulo" id="titulo" class="form-control" placeholder="Digite o título" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="relevancia">Relevância</label>
+                    <select name="relevancia_id" id="relevancia" class="form-control" required>
+                        <option selected disabled>Escolher...</option>
+                        {% for relevancia in relevancias %}
+                        <option value="{{ relevancia.id }}">{{ relevancia.nome }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="ano">Ano</label>
+                    <select name="ano_id" id="ano" class="form-control" required>
+                        <option selected disabled>Escolher...</option>
+                        {% for ano in anos %}
+                        <option value="{{ ano.id }}">{{ ano.nome }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="link">Link do Artigo</label>
+                    <input type="url" name="link" id="link" class="form-control" placeholder="Insira o link do artigo" required>
+                </div>
+            </div>
+
+           
+            <div class="col-md-6">
+              
+
+
+                <div class="form-group">
+                    <label for="autor">Pesquisador(a)</label>
+                    <input type="text" name="autor" id="autor" class="form-control" placeholder="Digite o nome do autor" required>
+                </div>
+
+
+
+                <fieldset class="form-group">
+                    <legend>Palavras-chave</legend>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            {% for palavra in palavras_chave %}
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="palavras_chave" id="palavra{{ palavra.id }}" value="{{ palavra.id }}">
+                                <label class="form-check-label" for="palavra{{ palavra.id }}">
+                                    {{ palavra.nome }}
+                                </label>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="col-12 text-center mt-4">
+                    <button type="submit" class="custom-button">Submeter</button>
+                </div>
+                
+                
+        </div>
+
+
+        <div class="row mt-3">
+
+        </div>
+    </form>
+</div>
+
+
+</body>
+</html>

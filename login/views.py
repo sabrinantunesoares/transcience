@@ -86,38 +86,40 @@ def novoArtigo(request):
             'palavras_chave': palavras_chave
         })
     else:
-        titulo = request.POST.get('titulo')
-        link = request.POST.get('link')
-        autor = request.POST.get('autor')
-        relevancia_id = request.POST.get('relevancia_id')
-        ano_id = request.POST.get('ano_id')
-        palavras_chave_ids = request.POST.getlist('palavras_chave') 
-        usuario_id = request.user.id  
-
         try:
+           
+            titulo = request.POST.get('titulo')
+            link = request.POST.get('link')
+            autor = request.POST.get('autor')
+            relevancia_id = request.POST.get('relevancia_id')
+            ano_id = request.POST.get('ano_id')
+            palavras_chave_ids = request.POST.getlist('palavras_chave')  
+            usuario_id = request.user.id  
+
             
             relevancia = Relevancia.objects.get(id=relevancia_id)
             ano = Ano.objects.get(id=ano_id)
             palavras_chave = PalavraChave.objects.filter(id__in=palavras_chave_ids)
             usuario = Usuarios.objects.get(id=usuario_id)
 
-         
+            
             artigo = Artigo.objects.create(
                 titulo=titulo,
                 link=link,
                 autor=autor,
                 relevancia_id=relevancia,
-                ano_id=ano,
+                ano_id=ano
             )
-        
-            artigo.palavras_chave.set(palavras_chave)
-            artigo.usuario.add(usuario)
-            artigo.save()
+
+            
+            artigo.palavras_chave.set(palavras_chave) 
+            artigo.usuario.set([usuario])  
 
             return HttpResponse('Artigo cadastrado com sucesso')
 
         except Exception as e:
             return HttpResponse(f"Erro ao cadastrar artigo: {e}")
+
 
 
 def pesquisar_artigos(request):
@@ -147,3 +149,5 @@ def novaSexualidade(request):
         nova_sexualidade = Sexualidade.objects.create(nome=nome)
 
         return HttpResponse('Sexualidade cadastrada com sucesso!')
+
+

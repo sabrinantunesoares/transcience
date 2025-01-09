@@ -42,12 +42,7 @@ class Cadastro_artigoView(generic.ListView):
     def get_queryset(self):
         return Artigo.objects.all()
     
-class PerfilView(generic.ListView):
-    template_name = "biblioteca/perfil.html"
-    context_object_name = "biblioteca"
 
-    def get_queryset(self):
-        return Artigo.objects.all()
     
 def pesquisar_artigos(request):
     query = request.GET.get('q', '')
