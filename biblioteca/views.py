@@ -2,17 +2,22 @@ from django.shortcuts import render
 from django.views import generic
 from .models import Artigo
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Q
 
 class IndexView(LoginRequiredMixin, generic.ListView):
     template_name = "biblioteca/index.html"
     context_object_name = "artigos"
-    login_url = '/auth/login/'  # Página de login para redirecionar se o usuário não estiver autenticado
+    login_url = '/auth/login/'  
 
     def get_queryset(self):
-        query = self.request.GET.get('q')  # Obtém o termo de busca
+        query = self.request.GET.get('q')  
         if query:
-            return Artigo.objects.filter(palavras_chave__nome__icontains=query).distinct()
-        return Artigo.objects.all()
+            return Artigo.objects.filter(
+                Q(titulo__icontains=query) | 
+                Q(autor__icontains=query) |  
+                Q(palavras_chave__nome__icontains=query)).distinct()
+        return Artigo.objects.all() 
+
 
 class HomeView(generic.ListView):
     template_name = "biblioteca/home.html"

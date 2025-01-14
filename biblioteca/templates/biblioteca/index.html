@@ -101,21 +101,36 @@
             {% for a in artigos %}
               <li class="artigo-item">
 
+                {% comment %}
                 {% if a.relevancia_id.imagem and a.relevancia_id.imagem.url %}
                   <img src="{{ a.relevancia_id.imagem.url }}" alt="{{ a.relevancia_id.descricao }}" width="20" height="20">
                 {% else %}
                   <p>Imagem não disponível</p>
                 {% endif %}
+                {% endcomment %}
                 
-                <a>{{ a.titulo }}</a>
-
-                <h4 class="palavras-chave">{{ a.palavras_chave.nome }}</h4>
-                {% for palavra_chave in a.palavras_chave.all %}
-                  <span class="texto-menor">{{ palavra_chave }}</span>
-                {% endfor %}
-
-                <p class="texto-menor"><a href="{{ a.link }}" target="_blank"> > Ler Mais</a> ({{ a.ano_id }})</p>
-              </li>
+              
+                  <a class="titulo-artigo" style="color: black; ">
+                    {{ a.titulo }}</span>
+                  </a>
+                  
+                  <p class="texto-menor" style="margin-top: 3px;">{{ a.autor }}<span style="margin-left: 5px;">({{ a.ano_id }})</p>
+                  
+                  <div style="display: flex; align-items: center; margin-top: 10px;">
+                    <a class="texto-menor">Palavras-chave:</a>
+                    <div class="palavras-chave-container" style="margin-left: 5px;">
+                      {% for palavra_chave in a.palavras_chave.all %}
+                        <span class="texto-menor" style="color: #1F4172;">{{ palavra_chave }}</span>
+                      {% endfor %}
+                    </div>
+                  </div>
+                  
+                  
+                  <p class="texto-menor" style="margin-top: 10px;">
+                    <a href="{{ a.link }}" target="_blank">> Ler Mais</a>
+                  </p>
+                </li>
+                
             {% endfor %}
           </ul>
         {% else %}

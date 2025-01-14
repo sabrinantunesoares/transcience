@@ -127,6 +127,11 @@
     transform: scale(1.02); /* Aumenta levemente o tamanho do botão ao passar o mouse */
 }
 
+.btn.btn-primary:active {
+    transform: scale(1.05);
+
+  }
+
 .btn.btn-secondary {
     margin-top: 7rem;
     border-radius: 25px;
@@ -146,3 +151,8 @@
     color: white; /* Cor do texto ao passar o mouse */
     transform: scale(1.02); /* Aumenta levemente o tamanho do botão ao passar o mouse */
 }
+
+.btn.btn-secondary:active {
+    transform: scale(1.05);
+
+  }
