@@ -122,17 +122,7 @@ def novoArtigo(request):
 
 
 
-def pesquisar_artigos(request):
-    busca = request.GET.get('q')  # Captura o termo de pesquisa do parâmetro GET 'q'
 
-    if busca:
-        # Filtra os artigos que têm palavras-chave relacionadas ao termo de busca
-        artigos = Artigo.objects.filter(palavras_chave__nome__icontains=busca)
-    else:
-        # Caso não haja pesquisa, retorna todos os artigos
-        artigos = Artigo.objects.all()
-
-    return render(request, 'index.html', {'artigos': artigos})  # Envia os artigos encontrados para o template
 
 def novaSexualidade(request):
     if request.method == "GET":

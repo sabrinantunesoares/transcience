@@ -66,7 +66,7 @@
                     <span class="nav_name">Configurações</span>
                 </a>
 
-                <a href="{% url 'auth:novoArtigo' %}" class="nav_link">
+                <a href="#" class="nav_link">
                   <i class='bx bx-bookmark nav_icon'></i>
                   <span class="nav_name"> + Adicionar artigo</span>
                 </a>
@@ -102,29 +102,29 @@
               <li class="artigo-item">
 
                 {% if a.relevancia_id.imagem and a.relevancia_id.imagem.url %}
-                <img src="{% get_media_prefix %}{{a.relevancia_id.imagem }}" alt="{{ a.relevancia_id.descricao }}" width="20" height="20">
-              {% else %}
-                <p>Imagem não disponível</p>
-              {% endif %}
-                <a>{{ a.titulo }}
-
-
-                </a>
+                  <img src="{{ a.relevancia_id.imagem.url }}" alt="{{ a.relevancia_id.descricao }}" width="20" height="20">
+                {% else %}
+                  <p>Imagem não disponível</p>
+                {% endif %}
+                
+                <a>{{ a.titulo }}</a>
 
                 <h4 class="palavras-chave">{{ a.palavras_chave.nome }}</h4>
                 {% for palavra_chave in a.palavras_chave.all %}
                   <span class="texto-menor">{{ palavra_chave }}</span>
-
                 {% endfor %}
+
                 <p class="texto-menor"><a href="{{ a.link }}" target="_blank"> > Ler Mais</a> ({{ a.ano_id }})</p>
               </li>
             {% endfor %}
           </ul>
+        {% else %}
+          <p>Nenhum artigo encontrado para a pesquisa "{{ request.GET.q }}".</p>
         {% endif %}
       </div>
     </div>
     
-    <!-- Coluna Adicional (Container à direita) -->
+    
     <div class="col-lg-4 col-md-12">
       <div class="additional-container">
         <div class="formteste">
@@ -134,6 +134,8 @@
 
   </div>
 </div>
+
+
 
 
  
