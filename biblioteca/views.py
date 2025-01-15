@@ -48,4 +48,4 @@ class Cadastro_artigoView(generic.ListView):
         return Artigo.objects.all()
     
 
-    
+

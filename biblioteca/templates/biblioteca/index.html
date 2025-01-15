@@ -66,7 +66,7 @@
                     <span class="nav_name">Configurações</span>
                 </a>
 
-                <a href="#" class="nav_link">
+                <a href="{% url 'novoArtigo' %}" class="nav_link">
                   <i class='bx bx-bookmark nav_icon'></i>
                   <span class="nav_name"> + Adicionar artigo</span>
                 </a>
@@ -130,6 +130,7 @@
                     <a href="{{ a.link }}" target="_blank">> Ler Mais</a>
                   </p>
                 </li>
+
                 
             {% endfor %}
           </ul>

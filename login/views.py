@@ -94,13 +94,13 @@ def novoArtigo(request):
             relevancia_id = request.POST.get('relevancia_id')
             ano_id = request.POST.get('ano_id')
             palavras_chave_ids = request.POST.getlist('palavras_chave')  
-            usuario_id = request.user.id  
+            usuario_id = request.user.id.get('user')
 
             
             relevancia = Relevancia.objects.get(id=relevancia_id)
             ano = Ano.objects.get(id=ano_id)
             palavras_chave = PalavraChave.objects.filter(id__in=palavras_chave_ids)
-            usuario = Usuarios.objects.get(id=usuario_id)
+            usuario = User.objects.get(id=usuario_id)
 
             
             artigo = Artigo.objects.create(

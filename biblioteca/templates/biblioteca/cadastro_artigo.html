@@ -76,17 +76,20 @@
                     <select name="relevancia_id" id="relevancia" class="form-control" required>
                         <option selected disabled>Escolher...</option>
                         {% for relevancia in relevancias %}
-                        <option value="{{ relevancia.id }}">{{ relevancia.nome }}</option>
+                        <option value="{{ relevancia.id }}">{{ relevancia.descricao }}</option>
                         {% endfor %}
                     </select>
                 </div>
+
+
+                
 
                 <div class="form-group">
                     <label for="ano">Ano</label>
                     <select name="ano_id" id="ano" class="form-control" required>
                         <option selected disabled>Escolher...</option>
                         {% for ano in anos %}
-                        <option value="{{ ano.id }}">{{ ano.nome }}</option>
+                        <option value="{{ ano.id }}">{{ ano.descricao }}</option>
                         {% endfor %}
                     </select>
                 </div>
