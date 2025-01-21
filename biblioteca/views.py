@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404, redirect, render
 from django.views import generic
-from .models import Artigo
+from .models import Artigo, Favorito
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 
@@ -17,6 +18,8 @@ class IndexView(LoginRequiredMixin, generic.ListView):
                 Q(autor__icontains=query) |  
                 Q(palavras_chave__nome__icontains=query)).distinct()
         return Artigo.objects.all() 
+    
+    
 
 
 class HomeView(generic.ListView):
@@ -47,5 +50,10 @@ class Cadastro_artigoView(generic.ListView):
     def get_queryset(self):
         return Artigo.objects.all()
     
+class Minha_bibliotecaView(generic.ListView):
+    template_name = "biblioteca/minha_biblioteca.html"
+    context_object_name = "biblioteca"
 
+    def get_queryset(self):
+        return Artigo.objects.all()
 

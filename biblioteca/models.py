@@ -80,7 +80,7 @@ class Artigo(models.Model):
     ano_id = models.ForeignKey(Ano, on_delete=models.CASCADE)
     
     palavras_chave = models.ManyToManyField(PalavraChave, related_name='artigos')
-    usuario = models.ManyToManyField(Usuarios, related_name='artigos')
+    usuario = models.ManyToManyField(User, related_name='artigos')
 
     def novoArtigo(self, titulo=None, **extra_fields):
         extra_fields.setdefault("is_staff", False)
@@ -94,7 +94,7 @@ class Artigo(models.Model):
 
 
 class Favorito(models.Model):
-    usuario = models.ForeignKey(Usuarios, on_delete=models.CASCADE)
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
     artigo = models.ForeignKey(Artigo, on_delete=models.CASCADE)
     data_favorito = models.DateField(auto_now_add=True)
 

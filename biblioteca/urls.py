@@ -10,6 +10,6 @@ urlpatterns = [
     path("cadastro/", views.CadastroView.as_view(), name="cadastro"),
     path("login/", views.LoginView.as_view(), name="login"),
     path("cadastro_artigo/", views.Cadastro_artigoView.as_view(), name="cadastro_artigo"),
-
+    path("minha_biblioteca/", views.Minha_bibliotecaView.as_view(), name="minha_biblioteca"),
 ]
 

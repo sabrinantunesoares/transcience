@@ -94,7 +94,7 @@ def novoArtigo(request):
             relevancia_id = request.POST.get('relevancia_id')
             ano_id = request.POST.get('ano_id')
             palavras_chave_ids = request.POST.getlist('palavras_chave')  
-            usuario_id = request.user.id.get('user')
+            usuario_id = request.user.id
 
             
             relevancia = Relevancia.objects.get(id=relevancia_id)
@@ -121,23 +121,9 @@ def novoArtigo(request):
             return HttpResponse(f"Erro ao cadastrar artigo: {e}")
 
 
+@login_required
+def profile_view(request):
+    return render(request, 'perfil.html', {'user': request.user})
 
-
-
-def novaSexualidade(request):
-    if request.method == "GET":
-        return render(request, 'index.html')
-    elif request.method == "POST":
-        # Capturar o dado enviado pelo formulário
-        nome = request.POST.get('nome')
-
-        # Validar o campo (opcional)
-        if not nome:
-            return HttpResponse('Erro: O campo sexualidade é obrigatório.', status=400)
-
-        # Criar e salvar o objeto no banco de dados
-        nova_sexualidade = Sexualidade.objects.create(nome=nome)
-
-        return HttpResponse('Sexualidade cadastrada com sucesso!')
 
 

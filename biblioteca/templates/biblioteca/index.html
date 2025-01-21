@@ -129,6 +129,13 @@
                   <p class="texto-menor" style="margin-top: 10px;">
                     <a href="{{ a.link }}" target="_blank">> Ler Mais</a>
                   </p>
+                  <a>
+                    {% if artigo in artigos_favoritos %}
+                      <button>Desfavoritar</button>
+                    {% else %}
+                      <button>Favoritar</button>
+                    {% endif %}
+                  </a>
                 </li>
 
                 
