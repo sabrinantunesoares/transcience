@@ -1,12 +1,12 @@
 from django.http import HttpResponse
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as login_django
 from django.contrib.auth.decorators import login_required
 import re
 from django.contrib.auth import logout as logout_django
-from biblioteca.models import Artigo, Relevancia, Ano, PalavraChave, Sexualidade, Usuarios
+from biblioteca.models import Artigo, Favorito, Relevancia, Ano, PalavraChave, Sexualidade, Usuarios
 from biblioteca.models import Artigo
 
 
@@ -23,11 +23,11 @@ def cadastro(request):
         if len(senha) < 8:
             return HttpResponse('A senha deve ter no mínimo 8 caracteres.')
         
-        if not re.search(r'[A-Z]', senha):  # Verifica letra maiúscula
+        if not re.search(r'[A-Z]', senha):  
             return HttpResponse('A senha deve conter pelo menos uma letra maiúscula.')
-        if not re.search(r'\d', senha):  # Verifica número
+        if not re.search(r'\d', senha):  
             return HttpResponse('A senha deve conter pelo menos um número.')
-        if not re.search(r'[^a-zA-Z0-9]', senha):  # Verifica caractere especial
+        if not re.search(r'[^a-zA-Z0-9]', senha):  
             return HttpResponse('A senha deve conter pelo menos um caractere especial.')
        
         if User.objects.filter(username=username).exists():
@@ -127,3 +127,11 @@ def profile_view(request):
 
 
 
+def favoritar_artigo(request, artigo_id):
+    artigo = get_object_or_404(Artigo, id=artigo_id)
+    favorito, created = Favorito.objects.get_or_create(usuario=request.user, artigo=artigo)
+
+    if not created:  
+        favorito.delete()
+
+    return redirect('biblioteca:index')  

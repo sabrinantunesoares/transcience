@@ -39,7 +39,7 @@
       
   
       {% if user.is_authenticated %}
-      Bem vindo(a) {{ user.username }}!
+      Perfil de {{ user.username }}!
  
       {% else %}
       <p>You are not logged in</p>
@@ -68,7 +68,7 @@
                 <span class="nav_logo-name">Transcience</span>
             </a>
             <div class="nav_list">
-                <a href="#" class="nav_link active">
+                <a href="{% url 'biblioteca:index' %}" class="nav_link active">
                     <i class='bx bx-grid-alt nav_icon'></i>
                     <span class="nav_name">Página inicial</span>
                 </a>
@@ -79,10 +79,6 @@
                 <a href="#" class="nav_link">
                     <i class='bx bx-message-square-detail nav_icon'></i>
                     <span class="nav_name">Biblioteca</span>
-                </a>
-                <a href="#" class="nav_link">
-                    <i class='bx bx-bookmark nav_icon'></i>
-                    <span class="nav_name">Configurações</span>
                 </a>
 
                 <a href="{% url 'novoArtigo' %}" class="nav_link">
@@ -98,18 +94,17 @@
     </nav>
 </div>
 
-    <div class="profile-container">
-        <div class="profile-header">
-            <img src="https://via.placeholder.com/100" alt="User Avatar">
-            <h1>{{ user.first_name }} {{ user.last_name }}</h1>
-            <p>@{{ user.username }}</p>
-        </div>
-        <div class="profile-details">
-            <p><strong>Email:</strong> {{ user.email }}</p>
-            <p><strong>Último Login:</strong> {{ user.last_login }}</p>
-            <p><strong>Data de Registro:</strong> {{ user.date_joined }}</p>
-        </div>
+<div class="profile-container">
+    <div class="profile-header">
+        <p><strong>Nome de usuário:</strong> @{{ user.username }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
     </div>
+    <div class="profile-details">
+        
+        <p><strong>Último Login:</strong> {{ user.last_login }}</p>
+        <p><strong>Data de Registro:</strong> {{ user.date_joined }}</p>
+    </div>
+</div>
 </body>
 </html>
 

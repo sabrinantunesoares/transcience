@@ -409,6 +409,33 @@ a {
     }
     
     
-    
+/* Adicionando um espaçamento superior para mover o conteúdo do perfil para baixo */
+.profile-container {
+    margin-top: 50px; /* Ajuste o valor conforme necessário */
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.profile-header {
+    padding: 10px;
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.profile-details {
+    padding: 10px;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.profile-details p {
+    margin: 8px 0;
+}
+
+
+
     
 }

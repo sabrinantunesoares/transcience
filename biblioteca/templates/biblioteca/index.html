@@ -10,7 +10,7 @@
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
 <link rel="stylesheet" href="{% static 'biblioteca/style.css' %}">
 <link href="fontawesome/css/all.css" rel="stylesheet">
-
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
 <!--Menu no topo-->
 
 <body id="body-pd">
@@ -53,17 +53,13 @@
                     <i class='bx bx-grid-alt nav_icon'></i>
                     <span class="nav_name">Página inicial</span>
                 </a>
-                <a href="#" class="nav_link">
+                <a href="{% url 'perfil' %}" class="nav_link">
                   <i class="fa-solid fa-circle-user"></i>
                     <span class="nav_name">Meu perfil</span>
                 </a>
                 <a href="#" class="nav_link">
                     <i class='bx bx-message-square-detail nav_icon'></i>
                     <span class="nav_name">Biblioteca</span>
-                </a>
-                <a href="#" class="nav_link">
-                    <i class='bx bx-bookmark nav_icon'></i>
-                    <span class="nav_name">Configurações</span>
                 </a>
 
                 <a href="{% url 'novoArtigo' %}" class="nav_link">
@@ -75,6 +71,7 @@
         <a href="#" class="nav_link">
             <i class='bx bx-log-out nav_icon'></i>
             <span class="nav_name">Sobre nós</span>
+            
         </a>
     </nav>
 </div>
@@ -125,17 +122,21 @@
                     </div>
                   </div>
                   
-                  
+                  <form action="{% url 'favoritar_artigo' a.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="favorite-button">
+                        {% if a in user.favorito_set.all %}
+                            <i class="fas fa-heart" style="color: red;"></i> Favorito
+                        {% else %}
+                            <i class="far fa-heart"></i> Favoritar
+                        {% endif %}
+                    </button>
+                  </form>
+                
                   <p class="texto-menor" style="margin-top: 10px;">
                     <a href="{{ a.link }}" target="_blank">> Ler Mais</a>
                   </p>
-                  <a>
-                    {% if artigo in artigos_favoritos %}
-                      <button>Desfavoritar</button>
-                    {% else %}
-                      <button>Favoritar</button>
-                    {% endif %}
-                  </a>
+                  
                 </li>
 
                 
