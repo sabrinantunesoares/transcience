@@ -48,7 +48,7 @@
                 <span class="nav_logo-name">Transcience</span>
             </a>
             <div class="nav_list">
-                <a href="#" class="nav_link active">
+                <a href="{% url 'biblioteca:index' %}" class="nav_link active">
                     <i class='bx bx-grid-alt nav_icon'></i>
                     <span class="nav_name">Página inicial</span>
                 </a>
@@ -89,7 +89,14 @@
     {% endfor %}
 </ul>
 
-</div>
-
-
+<h2>Meus Artigos Submetidos</h2>
+<ul>
+    {% for artigo in user.artigo_set.all %}
+        <li>
+            <a href="{{ artigo.link }}">{{ artigo.titulo }}</a> - {{ artigo.ano.descricao }}
+        </li>
+    {% empty %}
+        <p>Você ainda não submeteu nenhum artigo.</p>
+    {% endfor %}
+</ul>
   

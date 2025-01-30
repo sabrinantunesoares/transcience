@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="{% static 'biblioteca/style.css' %}">
 <link href="fontawesome/css/all.css" rel="stylesheet">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
+
 <!--Menu no topo-->
 
 <body id="body-pd">
@@ -57,7 +58,7 @@
                   <i class="fa-solid fa-circle-user"></i>
                     <span class="nav_name">Meu perfil</span>
                 </a>
-                <a href="#" class="nav_link">
+                <a href="{% url 'biblioteca:minha_biblioteca' %}" class="nav_link">
                     <i class='bx bx-message-square-detail nav_icon'></i>
                     <span class="nav_name">Biblioteca</span>
                 </a>
@@ -94,54 +95,42 @@
       <div class="artigos-container">
         
         {% if artigos %}
-          <ul>
-            {% for a in artigos %}
-              <li class="artigo-item">
-
-                {% comment %}
-                {% if a.relevancia_id.imagem and a.relevancia_id.imagem.url %}
-                  <img src="{{ a.relevancia_id.imagem.url }}" alt="{{ a.relevancia_id.descricao }}" width="20" height="20">
-                {% else %}
-                  <p>Imagem não disponível</p>
-                {% endif %}
-                {% endcomment %}
-                
-              
-                  <a class="titulo-artigo" style="color: black; ">
-                    {{ a.titulo }}</span>
+        <ul>
+          {% for a in artigos %}
+              <li class="artigo-item" style="position: relative; padding-bottom: 30px;">
+                  <a class="titulo-artigo" style="color: black;">
+                      {{ a.titulo }}
                   </a>
-                  
-                  <p class="texto-menor" style="margin-top: 3px;">{{ a.autor }}<span style="margin-left: 5px;">({{ a.ano_id }})</p>
+              
+                  <form action="{% url 'favoritar_artigo' a.id %}" method="post" class="favorite-form" id="favorite-form-{{ a.id }}">
+                      {% csrf_token %}
+                      <button type="submit" class="favorite-button" style="border: none; background: none; position: absolute; bottom: 5px; right: 5px;" id="favorite-btn-{{ a.id }}" onclick="toggleFavorite(event, {{ a.id }})">
+                          {% if a in user.favorito_set.all %}
+                              <i class="fas fa-heart" id="heart-{{ a.id }}" style="color: red; font-size: 18px;"></i>
+                          {% else %}
+                              <i class="far fa-heart" id="heart-{{ a.id }}" style="font-size: 18px;"></i>
+                          {% endif %}
+                      </button>
+                  </form>
+              
+                  <p class="texto-menor" style="margin-top: 3px;">{{ a.autor }} <span style="margin-left: 5px;">({{ a.ano_id }})</span></p>
                   
                   <div style="display: flex; align-items: center; margin-top: 10px;">
-                    <a class="texto-menor">Palavras-chave:</a>
-                    <div class="palavras-chave-container" style="margin-left: 5px;">
-                      {% for palavra_chave in a.palavras_chave.all %}
-                        <span class="texto-menor" style="color: #1F4172;">{{ palavra_chave }}</span>
-                      {% endfor %}
-                    </div>
+                      <a class="texto-menor">Palavras-chave:</a>
+                      <div class="palavras-chave-container" style="margin-left: 5px;">
+                          {% for palavra_chave in a.palavras_chave.all %}
+                              <span class="texto-menor" style="color: #1F4172;">{{ palavra_chave }}</span>
+                          {% endfor %}
+                      </div>
                   </div>
                   
-                  <form action="{% url 'favoritar_artigo' a.id %}" method="post">
-                    {% csrf_token %}
-                    <button type="submit" class="favorite-button">
-                        {% if a in user.favorito_set.all %}
-                            <i class="fas fa-heart" style="color: red;"></i> Favorito
-                        {% else %}
-                            <i class="far fa-heart"></i> Favoritar
-                        {% endif %}
-                    </button>
-                  </form>
-                
                   <p class="texto-menor" style="margin-top: 10px;">
-                    <a href="{{ a.link }}" target="_blank">> Ler Mais</a>
+                      <a href="{{ a.link }}" target="_blank">> Ler Mais</a>
                   </p>
-                  
-                </li>
-
-                
-            {% endfor %}
-          </ul>
+              </li>
+          {% endfor %}
+        </ul>
+      
         {% else %}
           <p>Nenhum artigo encontrado para a pesquisa "{{ request.GET.q }}".</p>
         {% endif %}
@@ -159,7 +148,44 @@
   </div>
 </div>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+<script>
+  function toggleFavorite(event, artigoId) {
+      event.preventDefault(); // Impede o envio do formulário imediatamente
+
+      const heartIcon = document.getElementById('heart-' + artigoId);
+      const favoriteForm = document.getElementById('favorite-form-' + artigoId);
+
+      // Verifica se o coração está favoritado (vermelho)
+      const isFavorited = heartIcon.classList.contains('fas');
+
+      // Alterna o ícone de coração
+      if (isFavorited) {
+          heartIcon.classList.remove('fas');
+          heartIcon.classList.add('far');
+          heartIcon.style.color = ''; // Reseta a cor para a cor padrão
+      } else {
+          heartIcon.classList.remove('far');
+          heartIcon.classList.add('fas');
+          heartIcon.style.color = 'red'; // Muda a cor para vermelho
+      }
+
+      // Envia a requisição AJAX para o servidor
+      $.ajax({
+          url: favoriteForm.action,  // URL do formulário
+          type: 'POST',
+          data: $(favoriteForm).serialize(),  // Dados do formulário (incluindo o CSRF token)
+          success: function(response) {
+              // A resposta do servidor pode ser usada aqui para realizar ações adicionais, se necessário
+              console.log('Favorito atualizado com sucesso');
+          },
+          error: function(xhr, status, error) {
+              console.error('Erro ao favoritar: ', error);
+          }
+      });
+  }
+</script>
 
 
  

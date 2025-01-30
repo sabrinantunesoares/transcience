@@ -52,6 +52,7 @@ a {
     transition: transform 0.3s, box-shadow 0.3s; 
 }
 
+
 .artigo-item:hover {
     transform: scale(1.04); /* Aumenta o item levemente */
 }
@@ -340,13 +341,13 @@ a {
         transition: background-color 0.3s, transform 0.2s;
     }
 
-    /* Efeito de hover no botão */
+   
     .search-button:hover {
         background-color: #febbbb;
         transform: scale(1.05);
     }
 
-    /* Efeito de foco no botão */
+
     .search-button:focus {
         outline: none;
     }
@@ -435,7 +436,14 @@ a {
     margin: 8px 0;
 }
 
+.favorite-button i {
+    cursor: pointer;
+    font-size: 20px;
+}
 
+.favorite-button i:hover {
+    color: red;
+}
 
     
 }

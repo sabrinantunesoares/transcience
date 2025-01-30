@@ -135,3 +135,4 @@ def favoritar_artigo(request, artigo_id):
         favorito.delete()
 
     return redirect('biblioteca:index')  
+
