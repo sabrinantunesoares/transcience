@@ -132,7 +132,8 @@ def favoritar_artigo(request, artigo_id):
     favorito, created = Favorito.objects.get_or_create(usuario=request.user, artigo=artigo)
 
     if not created:  
-        favorito.delete()
+        favorito.delete()  # Se já estiver favoritado, desfavorita o artigo
 
-    return redirect('biblioteca:index')  
+    return redirect('biblioteca:index')  # Redireciona para a página de artigos
+
 

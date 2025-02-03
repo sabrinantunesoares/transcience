@@ -13,8 +13,17 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
 
 <!--Menu no topo-->
-
+<head>
+  <meta charset="UTF-8"/>
+  <title>Transcience</title>
+  <link rel="shortcut icon" type="imagex/png" href="{% static 'biblioteca/images/logo.png'%}">
+</head>
 <body id="body-pd">
+
+  <div id="loading-screen" class="loading-screen">
+    <img src="{% static 'biblioteca/images/logo.png' %}" alt="Logo" class="loading-logo">
+  </div>
+
   <header class="header" id="header">
       <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
 
@@ -105,12 +114,12 @@
                   <form action="{% url 'favoritar_artigo' a.id %}" method="post" class="favorite-form" id="favorite-form-{{ a.id }}">
                       {% csrf_token %}
                       <button type="submit" class="favorite-button" style="border: none; background: none; position: absolute; bottom: 5px; right: 5px;" id="favorite-btn-{{ a.id }}" onclick="toggleFavorite(event, {{ a.id }})">
-                          {% if a in user.favorito_set.all %}
-                              <i class="fas fa-heart" id="heart-{{ a.id }}" style="color: red; font-size: 18px;"></i>
-                          {% else %}
-                              <i class="far fa-heart" id="heart-{{ a.id }}" style="font-size: 18px;"></i>
-                          {% endif %}
+                        {% if a in user.favorito_set.all %}
+                         {% else %}
+                            <i class="far fa-heart" id="heart-{{ a.id }}" style="font-size: 18px;"></i>
+                        {% endif %}
                       </button>
+                     
                   </form>
               
                   <p class="texto-menor" style="margin-top: 3px;">{{ a.autor }} <span style="margin-left: 5px;">({{ a.ano_id }})</span></p>
@@ -185,6 +194,25 @@
           }
       });
   }
+
+  
+    // Função para esconder a tela de carregamento quando a página carregar
+    window.addEventListener('load', function() {
+        const loadingScreen = document.getElementById('loading-screen');
+        loadingScreen.style.display = 'none';  // Esconde a tela de carregamento
+    });
+
+    function mostrarFavoritos() {
+        document.getElementById('favoritos').style.display = 'block';
+        document.getElementById('submissoes').style.display = 'none';
+    }
+
+    function mostrarSubmissoes() {
+        document.getElementById('favoritos').style.display = 'none';
+        document.getElementById('submissoes').style.display = 'block';
+    }
+
+
 </script>
 
 

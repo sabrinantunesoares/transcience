@@ -9,6 +9,12 @@
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
 <link rel="stylesheet" href="{% static 'biblioteca/style.css' %}">
 <link href="fontawesome/css/all.css" rel="stylesheet">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Transcience</title>
+    <link rel="shortcut icon" type="imagex/png" href="{% static 'biblioteca/images/logo.png'%}">
+</head>
 
 <!--Menu no topo-->
 
@@ -34,7 +40,95 @@
         {% csrf_token %}
         <button type="submit" class="logout-button">Sair</button>
       </form>
+    <style>
+    .artigo-item{
+        width: 1100px;
+        height: 160px;
+    }
+
+    .btn-container {
+        display: flex;
+        justify-content: center; 
+        align-items: center; 
+        gap: 10px; 
+        margin-top: 100px; 
+        margin-bottom: 40px;
+    }
+
+    .btn.btn-primary {
+        background-color: #1F4172;
+        color: white; 
+        padding: 5px 15px; 
+        border: none; 
+        border-radius: 10px; 
+        font-size: 18px; 
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); 
+        transition: background-color 0.3s ease, transform 0.3s ease; 
+        display: inline-block;
+        text-align: center;
+        cursor: pointer;
+    }
     
+    .btn.btn-primary:hover {
+        background-color: #357ABD;
+        transform: translateY(-2px); 
+    }
+    
+    .btn.btn-primary:active {
+        transform: translateY(2px); 
+        background-color: #134F8C; /* Cor de fundo mais escura para destacar */
+        box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.2); /* Sombra mais forte para destaque */
+    }
+    
+    /* Efeito ao focar no botão */
+    .btn.btn-primary:focus {
+        outline: none; /* Remove a borda padrão */
+        box-shadow: 0 0 20px rgba(31, 65, 114, 0.8); /* Sombra para indicar foco */
+    }
+
+    .btn.btn-secondary {
+        background-color: #febbbb;
+        color: white; 
+        padding: 5px 15px; 
+        border: none; 
+        border-radius: 10px; 
+        font-size: 18px; 
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); 
+        transition: background-color 0.3s ease, transform 0.3s ease; 
+        display: inline-block;
+        text-align: center;
+        cursor: pointer;
+    }
+    
+    .btn.btn-secondary:hover {
+        background-color:rgb(236, 144, 144);
+        transform: translateY(-2px); 
+    }
+    
+    .btn.btn-secondary:active {
+        transform: translateY(2px); 
+        background-color: rgb(236, 144, 144); /* Cor de fundo mais escura para destacar */
+        box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.2); /* Sombra mais forte para destaque */
+    }
+    
+    /* Efeito ao focar no botão */
+    .btn.btn-secondary:focus {
+        outline: none; /* Remove a borda padrão */
+        box-shadow: 0 0 20px rgba(31, 65, 114, 0.8); /* Sombra para indicar foco */
+    }
+    
+    h2 {
+        font-family: 'Poppins', sans-serif; 
+        font-weight: 600; 
+        color: #1F4172; 
+        font-size: 24px; 
+        margin-bottom: 15px; 
+        
+        text-transform: uppercase; 
+        margin-top: 30px;
+    }
+    
+    </style>
 
   </header>
 
@@ -52,17 +146,13 @@
                     <i class='bx bx-grid-alt nav_icon'></i>
                     <span class="nav_name">Página inicial</span>
                 </a>
-                <a href="#" class="nav_link">
+                <a href="{% url 'perfil' %}" class="nav_link">
                   <i class="fa-solid fa-circle-user"></i>
                     <span class="nav_name">Meu perfil</span>
                 </a>
-                <a href="#" class="nav_link">
+                <a href="{% url 'biblioteca:minha_biblioteca' %}" class="nav_link">
                     <i class='bx bx-message-square-detail nav_icon'></i>
                     <span class="nav_name">Biblioteca</span>
-                </a>
-                <a href="#" class="nav_link">
-                    <i class='bx bx-bookmark nav_icon'></i>
-                    <span class="nav_name">Configurações</span>
                 </a>
 
                 <a href="{% url 'novoArtigo' %}" class="nav_link">
@@ -80,23 +170,90 @@
     
 </div>
 
-<h2>Meus Artigos Favoritos</h2>
-<ul>
-    {% for favorito in user.favorito_set.all %}
-        <li>
-            <a href="{{ favorito.artigo.link }}">{{ favorito.artigo.titulo }}</a>
-        </li>
-    {% endfor %}
-</ul>
+<div class="btn-container">
+    <button class="btn btn-primary" onclick="mostrarFavoritos()">Meus Favoritos</button>
+    <button class="btn btn-secondary" onclick="mostrarSubmissoes()">Minhas Submissões</button>
+</div>
 
-<h2>Meus Artigos Submetidos</h2>
-<ul>
-    {% for artigo in user.artigo_set.all %}
-        <li>
-            <a href="{{ artigo.link }}">{{ artigo.titulo }}</a> - {{ artigo.ano.descricao }}
-        </li>
-    {% empty %}
-        <p>Você ainda não submeteu nenhum artigo.</p>
-    {% endfor %}
-</ul>
-  
+<div class="content-container">
+    <div class="content-container">
+        <div id="favoritos" style="display: block;">
+            
+            <ul>
+                {% for favorito in user.favorito_set.all %}
+                    <li class="artigo-item" style="position: relative; padding-bottom: 30px;">
+                        <a class="titulo-artigo" style="color: black;">
+                            {{ favorito.artigo.titulo }}
+                        </a>
+    
+                        <form action="{% url 'favoritar_artigo' favorito.artigo.id %}" method="post" class="favorite-form" id="favorite-form-{{ favorito.artigo.id }}">
+                            {% csrf_token %}
+                            <button type="submit" class="favorite-button" style="border: none; background: none; position: absolute; bottom: 5px; right: 5px;" id="favorite-btn-{{ favorito.artigo.id }}" onclick="toggleFavorite(event, {{ favorito.artigo.id }})">
+                                <i class="far fa-heart" id="heart-{{ favorito.artigo.id }}" style="font-size: 18px;"></i>
+                            </button>
+                        </form>
+    
+                        <p class="texto-menor" style="margin-top: 3px;">{{ favorito.artigo.autor }} <span style="margin-left: 5px;"></span> 
+    
+                        <div style="display: flex; align-items: center; margin-top: 10px;">
+                            <a class="texto-menor">Palavras-chave:</a>
+                            <div class="palavras-chave-container" style="margin-left: 5px;">
+                                {% for palavra_chave in favorito.artigo.palavras_chave.all %}
+                                    <span class="texto-menor" style="color: #1F4172;">{{ palavra_chave }}</span>
+                                {% endfor %}
+                            </div>
+                        </div>
+    
+                        <p class="texto-menor" style="margin-top: 10px;">
+                            <a href="{{ favorito.artigo.link }}" target="_blank">> Ler Mais</a>
+                        </p>
+                    </li>
+                {% empty %}
+                    <p>Você ainda não favoritou nenhum artigo.</p>
+                {% endfor %}
+            </ul>
+        </div>
+    
+        <div id="submissoes" style="display: none;">
+            
+            <ul>
+                {% for artigo in user.artigo_set.all %}
+                    <li class="artigo-item" style="position: relative; padding-bottom: 30px;">
+                        <a class="titulo-artigo" style="color: black;">
+                            {{ artigo.titulo }}
+                        </a>
+    
+                        <p class="texto-menor" style="margin-top: 3px;">{{ artigo.autor }} <span style="margin-left: 5px;">({{ artigo.ano.descricao }})</span></p>
+    
+                        <div style="display: flex; align-items: center; margin-top: 10px;">
+                            <a class="texto-menor">Palavras-chave:</a>
+                            <div class="palavras-chave-container" style="margin-left: 5px;">
+                                {% for palavra_chave in artigo.palavras_chave.all %}
+                                    <span class="texto-menor" style="color: #1F4172;">{{ palavra_chave }}</span>
+                                {% endfor %}
+                            </div>
+                        </div>
+    
+                        <p class="texto-menor" style="margin-top: 10px;">
+                            <a href="{{ artigo.link }}" target="_blank">> Ler Mais</a>
+                        </p>
+                    </li>
+                {% empty %}
+                    <p>Você ainda não submeteu nenhum artigo.</p>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    
+
+<script>
+    function mostrarFavoritos() {
+        document.getElementById('favoritos').style.display = 'block';
+        document.getElementById('submissoes').style.display = 'none';
+    }
+    
+    function mostrarSubmissoes() {
+        document.getElementById('favoritos').style.display = 'none';
+        document.getElementById('submissoes').style.display = 'block';
+    }
+</script>

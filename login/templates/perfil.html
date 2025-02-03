@@ -15,7 +15,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil</title>
+  
+        
+    <title>Transcience</title>
+    <link rel="shortcut icon" type="imagex/png" href="{% static 'biblioteca/images/logo.png'%}">
+    
 </head>
 <body>
     {% load static %}
@@ -76,7 +80,7 @@
                   <i class="fa-solid fa-circle-user"></i>
                     <span class="nav_name">Meu perfil</span>
                 </a>
-                <a href="#" class="nav_link">
+                <a href="{% url 'biblioteca:minha_biblioteca' %}" class="nav_link">
                     <i class='bx bx-message-square-detail nav_icon'></i>
                     <span class="nav_name">Biblioteca</span>
                 </a>
