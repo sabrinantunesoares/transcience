@@ -121,6 +121,8 @@ def novoArtigo(request):
             return HttpResponse(f"Erro ao cadastrar artigo: {e}")
 
 
+
+
 @login_required
 def profile_view(request):
     return render(request, 'perfil.html', {'user': request.user})

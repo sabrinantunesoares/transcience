@@ -25,6 +25,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("biblioteca/", include ("biblioteca.urls")),
     path('auth/', include('login.urls')),
+    
+   
 ]
 
 if settings.DEBUG:

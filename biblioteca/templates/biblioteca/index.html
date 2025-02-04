@@ -114,9 +114,10 @@
                   <form action="{% url 'favoritar_artigo' a.id %}" method="post" class="favorite-form" id="favorite-form-{{ a.id }}">
                       {% csrf_token %}
                       <button type="submit" class="favorite-button" style="border: none; background: none; position: absolute; bottom: 5px; right: 5px;" id="favorite-btn-{{ a.id }}" onclick="toggleFavorite(event, {{ a.id }})">
-                        {% if a in user.favorito_set.all %}
-                         {% else %}
-                            <i class="far fa-heart" id="heart-{{ a.id }}" style="font-size: 18px;"></i>
+                        {% if a.id in favoritos %}
+                          <i class="fas fa-heart" id="heart-{{ a.id }}" style="color: red; font-size: 18px;"></i>
+                        {% else %}
+                          <i class="far fa-heart" id="heart-{{ a.id }}" style="font-size: 18px;"></i>
                         {% endif %}
                       </button>
                      

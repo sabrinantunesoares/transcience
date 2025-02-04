@@ -8,7 +8,8 @@ from django.db.models import Q
 class IndexView(LoginRequiredMixin, generic.ListView):
     template_name = "biblioteca/index.html"
     context_object_name = "artigos"
-    login_url = '/auth/login/'  
+    login_url = '/auth/login/' 
+    
 
     def get_queryset(self):
         query = self.request.GET.get('q')  
@@ -19,6 +20,16 @@ class IndexView(LoginRequiredMixin, generic.ListView):
                 Q(palavras_chave__nome__icontains=query)).distinct()
         return Artigo.objects.all() 
     
+    def get_context_data(self, **kwargs):
+        usuario_atual = self.request.user
+        context = super(IndexView, self).get_context_data(**kwargs)
+        favoritos = Favorito.objects.filter(usuario=usuario_atual).values_list('artigo_id')
+        favoritos_ids = []
+        for f in favoritos:
+            if (f[0] not in favoritos_ids):
+                favoritos_ids.append(f[0])
+        context['favoritos'] = favoritos_ids
+        return context
     
 
 
