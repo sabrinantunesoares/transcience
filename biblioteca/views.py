@@ -30,8 +30,36 @@ class IndexView(LoginRequiredMixin, generic.ListView):
                 favoritos_ids.append(f[0])
         context['favoritos'] = favoritos_ids
         return context
-    
 
+class ArtigoListView(LoginRequiredMixin, generic.ListView):
+    model = Artigo
+    template_name = 'biblioteca/lista_artigos.html'
+    context_object_name = 'artigos'
+
+    def get_context_data(self, **kwargs):
+        usuario_atual = self.request.user
+        
+        # Verifique se o usuário está autenticado
+        if usuario_atual.is_authenticated:
+            # Filtra artigos associados ao usuário logado
+            artigos = usuario_atual.artigos.all()
+        else:
+            artigos = []
+
+        # Passando os artigos para o contexto
+        context = super().get_context_data(**kwargs)
+        context['artigos'] = artigos
+        return context
+
+def lista_artigos(request):
+    usuario_atual = request.user
+
+    if usuario_atual.is_authenticated:
+        artigos = usuario_atual.artigos.all()  # Aqui usamos o related_name 'artigos'
+    else:
+        artigos = []
+
+    return render(request, 'biblioteca/lista_artigos.html', {'artigos': artigos})
 
 class HomeView(generic.ListView):
     template_name = "biblioteca/home.html"
@@ -68,3 +96,16 @@ class Minha_bibliotecaView(generic.ListView):
     def get_queryset(self):
         return Artigo.objects.all()
 
+def exemplo_view(request):
+    if request.user.is_authenticated:
+        usuario_logado = request.user  # Acessa o objeto User do usuário logado
+        # Você pode acessar as informações do usuário, como:
+        nome_usuario = usuario_logado.username
+        email_usuario = usuario_logado.email
+        # Ou qualquer outro campo associado ao modelo User
+
+        # Exemplo de passar os dados para o template:
+        return render(request, 'exemplo_template.html', {'usuario': usuario_logado})
+    else:
+        # Caso o usuário não esteja logado, você pode redirecioná-lo para a página de login
+        return redirect('login')

@@ -97,7 +97,11 @@ def novoArtigo(request):
             usuario_id = request.user.id
 
             
-            relevancia = Relevancia.objects.get(id=relevancia_id)
+            if not relevancia_id:
+                relevancia = Relevancia.objects.first()  # Pega a primeira opção disponível
+            else:
+                relevancia = Relevancia.objects.get(id=relevancia_id)
+
             ano = Ano.objects.get(id=ano_id)
             palavras_chave = PalavraChave.objects.filter(id__in=palavras_chave_ids)
             usuario = User.objects.get(id=usuario_id)
@@ -139,3 +143,13 @@ def favoritar_artigo(request, artigo_id):
     return redirect('biblioteca:index')  # Redireciona para a página de artigos
 
 
+@login_required
+def artigos_usuario(request):
+    usuario_atual = request.user
+    print(f'Usuário logado: {usuario_atual.username}')  # Verifica o nome do usuário logado
+    
+    # Aqui estamos filtrando os artigos onde o usuário está relacionado via ManyToManyField
+    artigos = Artigo.objects.filter(usuario=usuario_atual)
+    print(artigos)  # Exibe os artigos no terminal
+    
+    return render(request, 'biblioteca/artigos_usuario.html', {'artigos': artigos})

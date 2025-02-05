@@ -217,7 +217,8 @@
         <div id="submissoes" style="display: none;">
             
             <ul>
-                {% for artigo in user.artigo_set.all %}
+                {% for artigo in usuario.artigo_set.all %}
+                
                     <li class="artigo-item" style="position: relative; padding-bottom: 30px;">
                         <a class="titulo-artigo" style="color: black;">
                             {{ artigo.titulo }}
@@ -242,8 +243,60 @@
                     <p>Você ainda não submeteu nenhum artigo.</p>
                 {% endfor %}
             </ul>
-        </div>
-    </div>
+            {% if artigos %}
+    <ul>
+        {% for artigo in artigos %}
+            <li>
+                <strong>{{ artigo.titulo }}</strong><br>
+                Autor: {{ artigo.autor }}<br>
+                Link: <a href="{{ artigo.link }}" target="_blank">{{ artigo.link }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+        <p>Você ainda não tem artigos cadastrados.</p>
+    {% endif %}
+    {% if user.is_authenticated %}
+    <p>Bem-vindo, {{ user.username }}!</p>
+    <p>Email: {{ user.email }}</p>
+    {% else %}
+        <p>Você não está logado.</p>
+    {% endif %}
+    
+    
+    {% block content %}
+      
+    
+      {% if artigos %}
+        <ul>
+          {% for a in artigos %}
+            <li class="artigo-item" style="position: relative; padding-bottom: 30px;">
+                <a class="titulo-artigo" style="color: black;">
+                    {{ a.titulo }}
+                </a>
+                <p class="texto-menor" style="margin-top: 3px;">Submetido por: {{ a.usuario.first.username }} <span style="margin-left: 5px;">({{ a.ano_id }})</span></p>
+    
+                <div style="display: flex; align-items: center; margin-top: 10px;">
+                    <a class="texto-menor">Palavras-chave:</a>
+                    <div class="palavras-chave-container" style="margin-left: 5px;">
+                        {% for palavra_chave in a.palavras_chave.all %}
+                            <span class="texto-menor" style="color: #1F4172;">{{ palavra_chave }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+    
+                <p class="texto-menor" style="margin-top: 10px;">
+                    <a href="{{ a.link }}" target="_blank">> Ler Mais</a>
+                </p>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>Você ainda não submeteu nenhum artigo.</p>
+      {% endif %}
+    {% endblock %}
+    
+
     
 
 <script>

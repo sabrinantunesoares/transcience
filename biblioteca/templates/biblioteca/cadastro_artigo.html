@@ -76,16 +76,7 @@
                     <input type="text" name="titulo" id="titulo" class="form-control" placeholder="Digite o título" required>
                 </div>
 
-                <div class="form-group">
-                    <label for="relevancia">Relevância</label>
-                    <select name="relevancia_id" id="relevancia" class="form-control" required>
-                        <option selected disabled>Escolher...</option>
-                        {% for relevancia in relevancias %}
-                        <option value="{{ relevancia.id }}">{{ relevancia.descricao }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-
+                
 
                 
 

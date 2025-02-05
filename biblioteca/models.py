@@ -81,6 +81,7 @@ class Artigo(models.Model):
     
     palavras_chave = models.ManyToManyField(PalavraChave, related_name='artigos')
     usuario = models.ManyToManyField(User, related_name='artigos')
+    
 
     def novoArtigo(self, titulo=None, **extra_fields):
         extra_fields.setdefault("is_staff", False)
