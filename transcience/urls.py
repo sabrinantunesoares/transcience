@@ -19,14 +19,15 @@ from django.urls import include, path
 from django.conf import settings
 from django.urls import include, path
 from django.conf.urls.static import static
+from biblioteca import views
+
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("biblioteca/", include ("biblioteca.urls")),
     path('auth/', include('login.urls')),
-    
-   
+    path('', views.HomeView.as_view(), name='HomeView'), 
 ]
 
 if settings.DEBUG:
