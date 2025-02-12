@@ -128,6 +128,7 @@
         margin-top: 30px;
     }
     
+    
     </style>
 
   </header>
@@ -242,7 +243,12 @@
                 <p class="texto-menor" style="margin-top: 10px;">
                     <a href="{{ a.link }}" target="_blank">> Ler Mais</a>
                 </p>
-                
+                <form action="{% url 'deletar_artigo' a.id %}" method="post" style="margin-left: 15px;">
+                    {% csrf_token %}
+                    <button type="submit" style="background: none; border: none; cursor: pointer;">
+                        <i class="fas fa-trash-alt" style="color: red; border: none; background: none; position: absolute; bottom: 5px; right: 5px;"></i>
+                    </button>
+                </form>
             </li>
           {% endfor %}
         </ul>

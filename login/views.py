@@ -120,6 +120,7 @@ def novoArtigo(request):
             artigo.usuario.set([usuario])  
 
             return HttpResponse('Artigo cadastrado com sucesso')
+            
 
         except Exception as e:
             return HttpResponse(f"Erro ao cadastrar artigo: {e}")
