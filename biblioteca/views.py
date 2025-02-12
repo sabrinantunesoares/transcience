@@ -33,23 +33,15 @@ class IndexView(LoginRequiredMixin, generic.ListView):
 
 class ArtigoListView(LoginRequiredMixin, generic.ListView):
     model = Artigo
-    template_name = 'biblioteca/lista_artigos.html'
+    template_name = 'biblioteca/minha_biblioteca.html'
     context_object_name = 'artigos'
 
-    def get_context_data(self, **kwargs):
-        usuario_atual = self.request.user
-        
-        # Verifique se o usuário está autenticado
-        if usuario_atual.is_authenticated:
-            # Filtra artigos associados ao usuário logado
-            artigos = usuario_atual.artigos.all()
-        else:
-            artigos = []
+    def get_queryset(self):
+        return Artigo.objects.filter(usuario=self.request.user)
 
-        # Passando os artigos para o contexto
-        context = super().get_context_data(**kwargs)
-        context['artigos'] = artigos
-        return context
+        
+   
+    
 
 def lista_artigos(request):
     usuario_atual = request.user

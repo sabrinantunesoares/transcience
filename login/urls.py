@@ -9,4 +9,5 @@ urlpatterns = [
     path('plataforma/', views.plataforma, name='plataforma'),
     path('profile_view/', views.profile_view, name='perfil'),
     path('favoritar/<int:artigo_id>/', views.favoritar_artigo, name='favoritar_artigo'),
+    path('deletar_artigo/<int:artigo_id>/', views.deletar_artigo, name='deletar_artigo'),
 ]

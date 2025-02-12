@@ -125,7 +125,11 @@ def novoArtigo(request):
             return HttpResponse(f"Erro ao cadastrar artigo: {e}")
 
 
-
+@login_required
+def deletar_artigo(request, artigo_id):
+    artigo = get_object_or_404(Artigo, id=artigo_id)
+    artigo.delete()
+    return redirect('biblioteca:minha_biblioteca')  # Redireciona para a biblioteca do usuário
 
 @login_required
 def profile_view(request):
