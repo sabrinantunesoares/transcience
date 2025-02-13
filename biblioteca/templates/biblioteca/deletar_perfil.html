@@ -1,0 +1,8 @@
+<h1>Tem certeza que deseja excluir seu perfil?</h1>
+<p>Esta ação não pode ser desfeita.</p>
+
+<form method="POST">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Confirmar Exclusão</button>
+    <a href="{% url 'profile_view' %}" class="btn btn-secondary">Cancelar</a>
+</form>

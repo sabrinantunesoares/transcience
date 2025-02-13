@@ -8,7 +8,9 @@ import re
 from django.contrib.auth import logout as logout_django
 from biblioteca.models import Artigo, Favorito, Relevancia, Ano, PalavraChave, Sexualidade, Usuarios
 from biblioteca.models import Artigo
-
+from django.contrib.auth.forms import UserChangeForm
+from django.contrib.auth import update_session_auth_hash
+from django.contrib import messages
 
 
 def cadastro(request):
@@ -158,3 +160,27 @@ def artigos_usuario(request):
     print(artigos)  # Exibe os artigos no terminal
     
     return render(request, 'biblioteca/artigos_usuario.html', {'artigos': artigos})
+
+@login_required
+def editar_perfil(request):
+    if request.method == "POST":
+        form = UserChangeForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, request.user)  # Mantém o usuário logado após a atualização
+            messages.success(request, "Perfil atualizado com sucesso!")
+            return redirect('profile_view')
+    else:
+        form = UserChangeForm(instance=request.user)
+
+    return render(request, 'biblioteca/editar_perfil.html', {'form': form})
+
+
+@login_required
+def deletar_perfil(request):
+    if request.method == "POST":
+        request.user.delete()
+        messages.success(request, "Perfil excluído com sucesso.")
+        return redirect('login')
+
+    return render(request, 'biblioteca/deletar_perfil.html')

@@ -10,4 +10,6 @@ urlpatterns = [
     path('profile_view/', views.profile_view, name='perfil'),
     path('favoritar/<int:artigo_id>/', views.favoritar_artigo, name='favoritar_artigo'),
     path('deletar_artigo/<int:artigo_id>/', views.deletar_artigo, name='deletar_artigo'),
+    path('perfil/editar/', views.editar_perfil, name='editar_perfil'),
+    path('perfil/deletar/', views.deletar_perfil, name='deletar_perfil'),
 ]

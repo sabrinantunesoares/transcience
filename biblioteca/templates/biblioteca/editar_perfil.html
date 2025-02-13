@@ -98,25 +98,11 @@
     </nav>
 </div>
 
-<div class="profile-container">
-    <div class="profile-header">
-        <p><strong>Nome de usuário:</strong> @{{ user.username }}</p>
-        <p><strong>Email:</strong> {{ user.email }}</p>
-    </div>
-    <div class="profile-details">
-        
-        <p><strong>Último Login:</strong> {{ user.last_login }}</p>
-        <p><strong>Data de Registro:</strong> {{ user.date_joined }}</p>
-    </div>
-</div>
-<a href="{% url 'editar_perfil' %}" class="btn btn-primary">Editar Perfil</a>
 
-<form action="{% url 'deletar_perfil' %}" method="POST" style="display: inline;">
+<h1>Editar Perfil</h1>
+<form method="POST">
     {% csrf_token %}
-    <button type="submit" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir seu perfil? Esta ação é irreversível.')">Excluir Perfil</button>
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success">Salvar Alterações</button>
 </form>
-
-</body>
-</html>
-
-
+<a href="{% url 'profile_view' %}" class="btn btn-secondary">Cancelar</a>
