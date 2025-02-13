@@ -19,7 +19,94 @@
         
     <title>Transcience</title>
     <link rel="shortcut icon" type="imagex/png" href="{% static 'biblioteca/images/logo.png'%}">
-    
+    <style>
+        .form-editar-perfil {
+            margin: 100px auto 50px; /* Aumentei o margin-top para 100px */
+        }
+        /* Estilo do formulário */
+        .form-editar-perfil {
+            max-width: 400px;
+            margin: 100px auto 50px;
+            padding: 20px;
+            background: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Labels */
+        .label-editar-perfil {
+            font-weight: 500;
+            color: #1f4172;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        /* Campos de entrada */
+        .input-editar-perfil {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            font-size: 16px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .input-editar-perfil:focus {
+            border-color: #1f4172;
+            box-shadow: 0 0 5px rgba(31, 65, 114, 0.5);
+        }
+
+        /* Botão de salvar */
+        .btn-salvar-editar-perfil {
+            display: block;
+            width: 100%;
+            background-color: #1f4172;
+            color: #f0f0f0;
+            border: none;
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 15px;
+        }
+
+        .btn-salvar-editar-perfil:hover {
+            background-color: #f0f0f0;
+            color: #1f4172;
+            border: 1px solid #1f4172;
+        }
+
+        .btn-cancelar-editar-perfil {
+            display: inline-block; /* Deixa o botão menor e mais compacto */
+            text-align: center;
+            padding: 8px 16px; /* Reduzi o padding para diminuir o tamanho */
+            border-radius: 8px; /* Mantém um visual arredondado */
+            font-size: 14px; /* Diminui o tamanho do texto */
+            font-weight: 500;
+            color: #1f4172; /* Texto branco para contraste */
+            border: 1px solid #febbbb; /* Borda rosa */
+            background: #febbbb; /* Fundo rosa */
+            transition: 0.3s;
+            text-decoration: none;
+            margin-top: 10px;
+
+        }
+        
+        .btn-cancelar-editar-perfil:hover {
+            background-color: #1f4172;
+            color: #ffffff;
+        }
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+    </style>
 </head>
 <body>
     {% load static %}
@@ -43,7 +130,7 @@
       
   
       {% if user.is_authenticated %}
-      Perfil de {{ user.username }}!
+      Editar Perfil de {{ user.username }}!
  
       {% else %}
       <p>You are not logged in</p>
@@ -99,10 +186,26 @@
 </div>
 
 
-<h1>Editar Perfil</h1>
-<form method="POST">
+{% block content %}
+
+
+<form method="post" class="form-editar-perfil">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-success">Salvar Alterações</button>
+    
+    <label for="username" class="label-editar-perfil">Usuário:</label>
+    <input type="text" id="username" name="username" value="{{ request.user.username }}" class="input-editar-perfil" required>
+    
+    <label for="email" class="label-editar-perfil">Email:</label>
+    <input type="email" id="email" name="email" value="{{ request.user.email }}" class="input-editar-perfil" required>
+    
+    <label for="senha" class="label-editar-perfil">Nova Senha:</label>
+    <input type="password" id="senha" name="senha" class="input-editar-perfil">
+
+    <div class="button-container">
+        <button type="submit" class="btn-salvar-editar-perfil">Salvar Alterações</button>
+        <a href="{% url 'perfil' %}" class="btn-cancelar-editar-perfil">Cancelar</a>
+    </div>
 </form>
-<a href="{% url 'profile_view' %}" class="btn btn-secondary">Cancelar</a>
+
+
+{% endblock %}

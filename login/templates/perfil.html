@@ -19,7 +19,54 @@
         
     <title>Transcience</title>
     <link rel="shortcut icon" type="imagex/png" href="{% static 'biblioteca/images/logo.png'%}">
-    
+    <style>
+        .btn.btn-primary {
+            margin-top: 2rem;
+            border-radius: 5px;
+            padding: 15px 30px; /* Aumenta o espaçamento interno do botão */
+            font-size: 15px; /* Aumenta o tamanho da fonte */
+            background-color: #1f4172;
+            font-weight: bold;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+            box-shadow: 3px 3px 4px rgb(183, 178, 178);
+        }
+        
+        .btn.btn-primary:hover {
+            background-color: #988e8e; /* Cor de fundo ao passar o mouse */
+            color: white; /* Cor do texto ao passar o mouse */
+            transform: scale(1.02); /* Aumenta levemente o tamanho do botão ao passar o mouse */
+        }
+        
+        .btn.btn-primary:active {
+            transform: scale(1.05);
+        
+          }
+        
+        .btn.btn-secondary {
+            margin-top: 2rem;
+            border-radius: 5px;
+            padding: 15px 30px; /* Aumenta o espaçamento interno do botão */
+            font-size: 15px; /* Aumenta o tamanho da fonte */
+            
+            color: #1f4172;
+            background-color: #febbbb;
+            font-weight: bold;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease; /* Animação suave */
+            box-shadow: 3px 3px 4px rgb(183, 178, 178);
+            border-color: #febbbb;
+        }
+        
+        .btn.btn-secondary:hover {
+            background-color: #988e8e;/* Cor de fundo ao passar o mouse */
+            color: white; /* Cor do texto ao passar o mouse */
+            transform: scale(1.02); /* Aumenta levemente o tamanho do botão ao passar o mouse */
+        }
+        
+        .btn.btn-secondary:active {
+            transform: scale(1.05);
+        
+          }
+    </style>
 </head>
 <body>
     {% load static %}
@@ -113,9 +160,8 @@
 
 <form action="{% url 'deletar_perfil' %}" method="POST" style="display: inline;">
     {% csrf_token %}
-    <button type="submit" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir seu perfil? Esta ação é irreversível.')">Excluir Perfil</button>
+    <button type="submit" class="btn btn-secondary" onclick="return confirm('Tem certeza que deseja excluir seu perfil? Esta ação é irreversível.')">Excluir Perfil</button>
 </form>
-
 </body>
 </html>
 

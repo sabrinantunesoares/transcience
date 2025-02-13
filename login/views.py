@@ -162,19 +162,27 @@ def artigos_usuario(request):
     return render(request, 'biblioteca/artigos_usuario.html', {'artigos': artigos})
 
 @login_required
+@login_required
 def editar_perfil(request):
     if request.method == "POST":
-        form = UserChangeForm(request.POST, instance=request.user)
-        if form.is_valid():
-            form.save()
-            update_session_auth_hash(request, request.user)  # Mantém o usuário logado após a atualização
-            messages.success(request, "Perfil atualizado com sucesso!")
-            return redirect('profile_view')
-    else:
-        form = UserChangeForm(instance=request.user)
+        user = request.user
+        username = request.POST.get("username")
+        email = request.POST.get("email")
+        senha = request.POST.get("senha")
 
-    return render(request, 'biblioteca/editar_perfil.html', {'form': form})
+        if username:
+            user.username = username
+        if email:
+            user.email = email
+        if senha:
+            user.set_password(senha)
+            update_session_auth_hash(request, user)  # Mantém o usuário logado após mudar a senha
 
+        user.save()
+        messages.success(request, "Perfil atualizado com sucesso!")
+        return redirect("perfil")
+
+    return render(request, "biblioteca/editar_perfil.html")
 
 @login_required
 def deletar_perfil(request):
