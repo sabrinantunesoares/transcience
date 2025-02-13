@@ -190,7 +190,7 @@
                         <form action="{% url 'favoritar_artigo' favorito.artigo.id %}" method="post" class="favorite-form" id="favorite-form-{{ favorito.artigo.id }}">
                             {% csrf_token %}
                             <button type="submit" class="favorite-button" style="border: none; background: none; position: absolute; bottom: 5px; right: 5px;" id="favorite-btn-{{ favorito.artigo.id }}" onclick="toggleFavorite(event, {{ favorito.artigo.id }})">
-                                <i class="far fa-heart" id="heart-{{ favorito.artigo.id }}" style="font-size: 18px;"></i>
+                                <i class="fas fa-heart" id="heart-{{ favorito.artigo.id }}" style="font-size: 18px; color: red;"></i>
                             </button>
                         </form>
     
