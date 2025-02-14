@@ -121,11 +121,12 @@ def novoArtigo(request):
             artigo.palavras_chave.set(palavras_chave) 
             artigo.usuario.set([usuario])  
 
-            return HttpResponse('Artigo cadastrado com sucesso')
-            
-
+            messages.success(request, "Artigo cadastrado com sucesso!")
+            return redirect('novoArtigo')  
+        
         except Exception as e:
-            return HttpResponse(f"Erro ao cadastrar artigo: {e}")
+            messages.error(request, f"Erro ao cadastrar artigo: {e}")
+            return redirect('novoArtigo')
 
 
 @login_required
